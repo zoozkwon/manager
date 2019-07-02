@@ -1,0 +1,183 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>샵 관리자</a></li>
+                    <li class="breadcrumb-item active">계정 관리</li>
+                  </ol>
+                </div>
+                <h4 class="page-title">일반 유저 계정 관리</h4>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+
+                  <!--샵 정보-->
+                  <div class="col-md-12 col-xl-12" *ngFor="let user of nomals">
+                    <div class="card m-b-30">
+
+                      <div class="card-body new-user">
+                        <h5 class="header-title mb-4 mt-0">개인정보 수정</h5>
+
+                        <div class="form-group row">
+                          <label for="userId" class="col-sm-2 col-form-label">아이디</label>
+                          <div class="col-sm-10">
+                            <input class="form-control" type="text" placeholder="jabiss" id="userId" value="{{user.id}}" #id>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="userName" class="col-sm-2 col-form-label">이름</label>
+                          <div class="col-sm-10">
+                            <input class="form-control" type="text" placeholder="파블로" id="userName" value="{{user.name}}" #name>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="password" class="col-sm-2 col-form-label">비밀번호</label>
+
+                          <div class="col-sm-10">
+                            <input class="form-control" type="password" placeholder="비밀번호" id="password" #Pass>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="email" class="col-sm-2 col-form-label">이메일</label>
+                          <div class="col-sm-10">
+                            <input class="form-control"
+                                   type="email"
+                                   placeholder="이메일"
+                                   value="{{user.email}}"
+                                   id="email" #email>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="mobile" class="col-sm-2 col-form-label">모바일</label>
+                          <div class="col-sm-10">
+                            <input class="form-control"
+                                   type="tel"
+                                   placeholder="휴대전화"
+                                   value="{{user.mobile}}"
+                                   id="mobile" #mobile>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="point" class="col-sm-2 col-form-label">포인트</label>
+                          <div class="col-sm-10">
+                            <input class="form-control"
+                                   type="number"
+                                   placeholder="포인트"
+                                   value="{{user.point}}"
+                                   id="point" #point>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label class="col-sm-2 col-form-label">관리자 권한</label>
+                          <div class="col-sm-4">
+                            <select class="custom-select" #authority>
+                              <!--<option selected></option>-->
+                              <option *ngIf="user.authority == 'Y'" selected disabled>승인</option>
+                              <option *ngIf="user.authority != 'Y'" selected disabled>취소</option>
+                              <option value="Y">승인</option>
+                              <option value="N">취소</option>
+                            </select>
+                          </div> <!-- end col -->
+
+                          <label class="col-sm-2 col-form-label">샵 매니저 권한</label>
+                          <div class="col-sm-4">
+                            <select class="custom-select" #isShopAuth>
+                              <!--<option selected></option>-->
+                              <option *ngIf="user.isShopAuth == 'Y'" selected disabled>승인</option>
+                              <option *ngIf="user.isShopAuth != 'Y'" selected disabled>취소</option>
+                              <option value="Y">승인</option>
+                              <option value="N">취소</option>
+                            </select>
+                          </div> <!-- end col -->
+
+                        </div>
+
+                        <div class="form-group row">
+                          <label class="col-sm-2 col-form-label">계정 타입</label>
+                          <div class="col-sm-4">
+                            <select class="custom-select" #approval>
+                              <!--<option selected></option>-->
+                              <option *ngIf="user.approval == 'Y'" selected disabled>매니저 유저</option>
+                              <option *ngIf="user.approval != 'Y'" selected disabled>일반 유저</option>
+                              <option value="Y">매니저 유저</option>
+                              <option value="N">일반 유저</option>
+                            </select>
+                          </div> <!-- end col -->
+
+                          <label class="col-sm-2 col-form-label">계정 비활성화</label>
+                          <div class="col-sm-4">
+                            <select class="custom-select" #is_Delete>
+                              <!--<option selected></option>-->
+                              <option *ngIf="user.is_Delete == 'N'" selected disabled>활성화</option>
+                              <option *ngIf="user.is_Delete != 'N'" selected disabled>비활성화</option>
+                              <option value="N">활성화</option>
+                              <option value="Y">비활성화</option>
+                            </select>
+                          </div> <!-- end col -->
+
+                        </div>
+
+                        <div class="button-items">
+                          <button type="button" class="btn btn-primary waves-effect waves-light float-right"
+                                  (click)="back()">돌아가기</button>
+                          <button type="button" class="btn btn-primary waves-effect waves-light float-right"
+                                  (click)="update(user)">변경사항 저장</button>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- //샵 정보 -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <app-footer></app-footer>
+
+  </div>
+  <!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+</body>

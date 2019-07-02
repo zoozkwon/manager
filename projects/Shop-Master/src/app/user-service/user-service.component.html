@@ -1,0 +1,120 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>관리자</a></li>
+                    <li class="breadcrumb-item active">고객센터</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+                  <h5 class="header-title mb-4 mt-0">고객센터 문의 리스트</h5>
+                  <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                      <thead>
+                      <tr style="text-align: center;">
+                        <th class="border-top-0">#</th>
+                        <th class="border-top-0">작성자</th>
+                        <th class="border-top-0">상태</th>
+                        <th class="border-top-0">작성일</th>
+                        <th class="border-top-0">수정</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let list of Querstions" style="text-align: center;">
+                        <td>
+                          <a >{{list.no}}</a>
+                        </td>
+                        <td>
+                          {{list.writer_name}}
+                        </td>
+                        <td *ngIf="list.answer == '미답변'">
+                          <a style="color:#ff0000">{{list.answer}}</a>
+                        </td>
+                        <td *ngIf="list.answer != '미답변'">
+                          <a style="color:#0000ff">
+                          {{list.answer}}
+                          </a>
+                        </td>
+                        <td>
+                          {{list.date}}
+                        </td>
+
+                        <td>
+                          <div class="button-items">
+                            <button type="button" class="btn btn-primary waves-effect waves-light" (click)="moveThePage(list)">수정</button>
+                          </div>
+                        </td>
+                      </tr>
+
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+              <div style="text-align: center">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                    <li class="page-item {{prev_pages}}" (click)="move_prev_pages()">
+                      <a class="page-link" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                    </li>
+                    <li *ngFor="let page of pagenation" class="page-item {{page.active_class}}" (click)="move_page($event,page)"><a class="page-link">{{page.page}}</a></li>
+                    <li class="page-item {{next_pages}}" (click)="move_next_pages()">
+                      <a class="page-link" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <app-footer></app-footer>
+
+  </div>
+  <!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+</body>

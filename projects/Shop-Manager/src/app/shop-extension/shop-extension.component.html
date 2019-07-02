@@ -1,0 +1,102 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>샵 관리자</a></li>
+                    <li class="breadcrumb-item active">제휴샵 연장 / 신청</li>
+
+                  </ol>
+                </div>
+                <h4 class="page-title">제휴샵 연장 / 신청</h4>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+                  <h5 class="header-title mb-4 mt-0">제휴샵 리스트</h5>
+                  <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                      <thead>
+                      <tr style="text-align: center">
+                        <th class="border-top-0">#</th>
+                        <th class="border-top-0">로고</th>
+                        <th class="border-top-0">샵 이름</th>
+                        <th class="border-top-0">진행 상태</th>
+                        <th class="border-top-0">샵 남은 이용가능 기간</th>
+                        <th class="border-top-0">연장신청</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let shop of items" style="text-align: center">
+                        <td>{{shop.no}}</td>
+                        <td>
+                          <img src="{{shop.logo}}" alt="" style="width:30px; border-radius: 50%">
+                        </td>
+                        <td>
+                          <a>{{shop.shop_name}}</a>
+                        </td>
+                        <td *ngIf="shop.receives == 'Y'">
+                          승인 대기중
+                        </td>
+                        <td *ngIf="shop.receives == 'N'">
+                          ---
+                        </td>
+                        <td>
+                          {{shop.LeftDate}} 일
+                          <!--<div data-role="countdown" data-hours="50" style="width:70px;"></div>-->
+                        </td>
+
+                        <td>
+                          <a class="btn btn-primary waves-effect waves-light" style="color : #ffffff" (click)="moveThereceives(shop)" >연장</a>
+                        </td>
+                      </tr>
+
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- container -->
+
+      </div> <!-- Page content Wrapper -->
+
+    </div> <!-- content -->
+
+    <app-footer></app-footer>
+
+  </div>
+  <!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+</body>

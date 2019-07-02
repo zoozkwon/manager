@@ -1,0 +1,214 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+          <div class="page-content-wrapper ">
+
+            <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>관리자</a></li>
+                    <li class="breadcrumb-item active">샵 연장 신청 관리</li>
+                  </ol>
+                </div>
+                <h4 class="page-title">샵 연장 리스트</h4>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+                  <ul class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item waves-effect waves-light">
+                      <a class="nav-link active" data-toggle="tab" href="#list" role="tab">연장 신청 내역</a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                      <a class="nav-link" data-toggle="tab" href="#shops" role="tab">연장 신청 리스트</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane active p-3" id="list" role="tabpanel">
+                      <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                          <thead>
+                          <tr style="text-align: center;">
+                            <th class="border-top-0">#</th>
+                            <th class="border-top-0">샵 이름</th>
+                            <th class="border-top-0">신청자</th>
+                            <th class="border-top-0">신청 일자</th>
+                            <th class="border-top-0">입금 기한</th>
+                            <th class="border-top-0">남은 기한</th>
+                            <th class="border-top-0">상태</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let list of receives" style="text-align: center;">
+                            <td>
+                              {{list.no}}
+                            </td>
+                            <td>
+                              {{list.shop_name}}
+                            </td>
+                            <td>
+                              {{list.receive_id}}
+                            </td>
+                            <td>
+                              {{list.receive_date}}
+                            </td>
+                            <td>
+                              {{list.deposit_date}}
+                            </td>
+                            <td>
+                              {{list.LeftDate}}
+                            </td>
+                            <td *ngIf="list.status == 'Y'">
+                              정상승인
+                            </td>
+                            <td *ngIf="list.status == 'N'">
+                              입금기간 만료
+                            </td>
+                            <td *ngIf="list.status == 'P'">
+                              입금 대기 중
+                            </td>
+                          </tr>
+
+                          </tbody>
+                        </table>
+
+                      </div>
+
+                      <div style="text-align: center">
+                        <nav aria-label="Page navigation example">
+                          <ul class="pagination justify-content-center">
+                            <li class="page-item {{prev_pages}}" (click)="move_prev_pages()">
+                              <a class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                              </a>
+                            </li>
+                            <li *ngFor="let page of pagenation" class="page-item {{page.active_class}}" (click)="move_page($event,page)"><a class="page-link">{{page.page}}</a></li>
+                            <li class="page-item {{next_pages}}" (click)="move_next_pages()">
+                              <a class="page-link" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+
+                    </div>
+
+                    <div class="tab-pane p-3" id="shops" role="tabpanel">
+                      <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                          <thead>
+                          <tr style="text-align: center;">
+                            <th class="border-top-0">로고1</th>
+                            <th class="border-top-0">샵 이름</th>
+                            <th class="border-top-0">신청자</th>
+                            <th class="border-top-0">신청 일자</th>
+                            <th class="border-top-0">입금 기한</th>
+                            <th class="border-top-0">남은 이용 기간</th>
+                            <th class="border-top-0">승인</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let shop of items" style="text-align: center;">
+                            <td>
+                              <img src="assets/images/coins/dash.png" alt="" style="width:30px">
+                            </td><td>
+                            <a >{{shop.shop_name}}</a>
+                          </td>
+                            <td>{{shop.receive_data.receive_id}}</td>
+                            <td>{{shop.receive_data.receive_date}}</td>
+                            <td>{{shop.receive_data.deposit_date}}</td>
+
+                            <td *ngIf="shop.LeftDate == '기간 만료'">
+                              0 일
+                              <!--
+                              <div data-role="countdown" data-hours="5" style="width:70px;"></div>
+                              -->
+                            </td>
+                            <td *ngIf="shop.LeftDate != '기간 만료'">
+                              {{shop.LeftDate}} 일
+                              <!--
+                              <div data-role="countdown" data-hours="5" style="width:70px;"></div>
+                              -->
+                            </td>
+
+                            <td>
+                              <div class="button-items">
+                                <button type="button" class="btn btn-primary waves-effect waves-light" (click)="moveThePage(shop)">승인관리</button>
+                              </div>
+                            </td>
+                          </tr>
+
+                          </tbody>
+                        </table>
+
+                      </div>
+
+                      <div style="text-align: center">
+                        <nav aria-label="Page navigation example">
+                          <ul class="pagination justify-content-center">
+                            <li class="page-item {{lprev_pages}}" (click)="lmove_prev_pages()">
+                              <a class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                              </a>
+                            </li>
+                            <li *ngFor="let page of lpagenation" class="page-item {{page.active_class}}" (click)="lmove_page($event,page)"><a class="page-link">{{page.page}}</a></li>
+                            <li class="page-item {{lnext_pages}}" (click)="lmove_next_pages()">
+                              <a class="page-link" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <app-footer></app-footer>
+
+  </div>
+  <!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+</body>

@@ -1,0 +1,212 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>관리자</a></li>
+                    <li class="breadcrumb-item active">샵 카테고리 관리</li>
+                  </ol>
+                </div>
+                <h4 class="page-title">샵 카테고리 관리</h4>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+
+          <!-- end page title end breadcrumb -->
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+
+            <!--샵 직원 정보-->
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+
+                <div class="card-body new-user">
+                  <h5 class="header-title mb-4 mt-0">카테고리 추가</h5>
+
+                  <div class="text-right">
+                    <!-- Small modal -->
+                    <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target=".new-staff-modal-center">새 직원 추가</button>
+                  </div>
+                  <!-- 새 직원 추가 모달 -->
+                  <div class="modal fade new-staff-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" >카테고리 작성</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+
+                          <div class="form-group row">
+                            <label for="new_category_name" class="col-sm-2 col-form-label">카테고리명</label>
+                            <div class="col-sm-10">
+                              <input class="form-control" type="text" placeholder="배너명" id="new_category_name" #new_name>
+                            </div>
+                          </div>
+
+                          <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">이미지</label>
+                            <input type="file" id="new_shop_category" class="dropify" (change)="selectFileToUpload($event)"/>
+                          </div>
+
+                          <div class="button-items">
+                            <button type="button"
+                                    class="btn btn-primary waves-effect waves-light"
+                                    (click)="new_imageUpdate()">카테고리 생성</button>
+                          </div>
+                        </div>
+
+                      </div><!-- /.modal-content -->
+                    </div><!-- /.modal-dialog -->
+
+                  </div><!-- /.modal -->
+                  <!-- //직원 추가 모달 -->
+
+                  <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                      <thead>
+                      <tr style="text-align: center">
+                        <th class="border-top-0">#</th>
+                        <th class="border-top-0">카테고리 명</th>
+                        <th class="border-top-0">이미지</th>
+                        <th class="border-top-0">활성화</th>
+                        <th class="border-top-0">작성일</th>
+                        <th class="border-top-0">편집</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr  style="text-align: center" *ngFor="let category of categorys">
+                        <td>
+                          {{category.no}}
+                        </td>
+                        <td>
+                          {{category.name}}
+                        </td>
+                        <td>
+                          <img src="{{category.images}}" style="width:75px; height:75px;">
+                        </td>
+                        <td>
+                          <div class="button-items">
+                            <button type="button" class="btn {{category.color}} waves-effect waves-light" (click)="change_active(category)">{{category.actives}}</button>
+                          </div>
+                        </td>
+                        <td>
+                          {{category.date}}
+                        </td>
+
+                        <td>
+
+                          <div class="text-center">
+                            <!-- Small modal -->
+                            <button type="button"
+                                    class="btn btn-primary waves-effect waves-light"
+                                    data-toggle="modal"
+                                    data-animation="bounce"
+                                    data-target=".bs-example-modal-center"
+                                    (click)="GetCategoryData(category)">편집</button>
+                          </div>
+
+                          <!-- 직원 편집 모달 -->
+                          <div class="modal fade bs-example-modal-center" tabindex="-1"
+                               role="dialog"
+                               aria-labelledby="mySmallModalLabel"
+                               aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">카테고리 편집</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body" *ngFor="let item of items">
+
+                                  <div class="form-group row">
+                                    <label for="category_name" class="col-sm-2 col-form-label">카테고리명</label>
+                                    <div class="col-sm-10">
+                                      <input class="form-control" type="text" placeholder="앨리스" value="{{item.name}}" id="category_name" #name>
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group row">
+
+                                    <label class="col-sm-2 col-form-label">이미지</label>
+                                    <!-- 시작 시간 -->
+                                    <div class="col-sm-10">
+                                      <img *ngIf="!now_category" src="{{item.images}}" style="width:150px; height:150px;">
+                                      <img *ngIf="now_category" src="{{now_category}}" style="width:150px; height:150px;">
+                                    </div>
+                                  </div>
+
+                                  <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">이미지 변경</label>
+                                    <input type="file" id="shop_category" class="dropify" (change)="selectFileToUpload($event)"/>
+                                  </div>
+
+                                  <div class="button-items">
+                                    <button type="button"
+                                            class="btn btn-primary waves-effect waves-light"
+                                            (click)="imageUpdate(item)">변경사항 저장</button>
+                                    <button type="button"
+                                            class="btn btn-primary waves-effect waves-light"
+                                            (click)="delete(item)">카테고리 삭제</button>
+                                  </div>
+                                </div>
+
+                              </div><!-- /.modal-content -->
+                            </div><!-- /.modal-dialog -->
+                          </div><!-- /.modal -->
+                          <!-- //직원 편집 모달 -->
+
+                        </td>
+                      </tr>
+
+                      </tbody>
+                    </table>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <app-footer></app-footer>
+
+  </div>
+  <!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+</body>

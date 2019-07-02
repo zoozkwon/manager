@@ -1,0 +1,80 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a >샵 관리자</a></li>
+                    <li class="breadcrumb-item"><a >제휴샵 관리</a></li>
+                    <li class="breadcrumb-item active">제휴샵 편집</li>
+                  </ol>
+                </div>
+                <h4 class="page-title">제휴샵 관리</h4>
+              </div>
+            </div>
+          </div>
+          <!-- Nav tabs -->
+          <ul class="nav nav-pills nav-justified" role="tablist">
+            <li class="nav-item waves-effect waves-light">
+              <a class="nav-link active" data-toggle="tab" href="#shop-data" role="tab">제휴샵 관리</a>
+            </li>
+            <li class="nav-item waves-effect waves-light">
+              <a class="nav-link" data-toggle="tab" href="#shop-staff" role="tab">샵 직원 관리</a>
+            </li>
+            <li class="nav-item waves-effect waves-light">
+              <a class="nav-link" data-toggle="tab" href="#shop-course" role="tab">샵 코스 관리</a>
+            </li>
+          </ul>
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+
+            <div class="tab-content" style="width: 100%;">
+
+              <div class="tab-pane active" id="shop-data" role="tabpanel">
+                <app-shop-manage-data></app-shop-manage-data>
+              </div>
+
+              <div class="tab-pane p-3" id="shop-staff" role="tabpanel">
+                <app-shop-manage-staff></app-shop-manage-staff>
+              </div>
+              <div class="tab-pane p-3" id="shop-course" role="tabpanel">
+                <app-shop-manage-course></app-shop-manage-course>
+              </div>
+
+        </div><!-- container -->
+
+          </div>
+        </div>
+      </div> <!-- Page content Wrapper -->
+
+    </div> <!-- content -->
+
+    <app-footer></app-footer>
+
+  </div>
+  <!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+</body>

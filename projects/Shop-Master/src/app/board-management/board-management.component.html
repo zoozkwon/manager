@@ -1,0 +1,355 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>관리자</a></li>
+                    <li class="breadcrumb-item active">게시글 관리</li>
+                  </ol>
+                </div>
+                <h4 class="page-title">게시글 관리</h4>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+                  <ul class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item waves-effect waves-light">
+                      <a class="nav-link {{board_active}}" data-toggle="tab" href="#board" name="board" role="tab" (click)="tab($event)">게시글 관리</a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                      <a class="nav-link {{comment_active}}" data-toggle="tab" href="#comment" name="comment" role="tab" (click)="tab($event)">댓글 관리</a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                      <a class="nav-link {{nomal_active}}" data-toggle="tab" href="#nomal" name="nomal" role="tab" (click)="tab($event)">일반 공지 내용 관리</a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                      <a class="nav-link {{manager_active}}" data-toggle="tab" href="#manager" name="manager" role="tab" (click)="tab($event)">매니저 공지 내용 관리</a>
+                    </li>
+                  </ul>
+                  <div class="button-items">
+                    <a type="button" class="btn btn-primary waves-effect waves-light float-right" href="master/BoardAnnounCreate">공지 작성</a>
+                  </div>
+                  <div class="tab-content">
+                    <div class="tab-pane active p-3" id="board" role="tabpanel">
+                      <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                          <thead>
+                          <tr style="text-align: center;">
+                            <th class="border-top-0">#</th>
+                            <th class="border-top-0">작성자</th>
+                            <th class="border-top-0">제목</th>
+                            <th class="border-top-0">게시판</th>
+                            <th class="border-top-0">조회수</th>
+                            <th class="border-top-0">댓글수</th>
+                            <th class="border-top-0">작성일</th>
+                            <th class="border-top-0">상태</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let list of boards" style="text-align: center;">
+                            <td>
+                              {{list.no}}
+                            </td>
+                            <td>
+                              {{list.writer_id}}
+                            </td>
+                            <td>
+                              {{list.title}}
+                            </td>
+                            <td>
+                              {{list.type}}
+                            </td>
+                            <td>
+                              {{list.click}}
+                            </td>
+                            <td>
+                              {{list.comments}}
+                            </td>
+                            <td>
+                              {{list.date}}
+                            </td>
+                            <td>
+                              <div class="button-items">
+                                <button type="button" class="btn btn-primary waves-effect waves-light" (click)="moveThePage(list)">상세</button>
+                              </div>
+                            </td>
+                          </tr>
+
+                          </tbody>
+                        </table>
+
+                      </div>
+
+                      <div style="text-align: center">
+                        <nav aria-label="Page navigation example">
+                          <ul class="pagination justify-content-center">
+                            <li class="page-item {{prev_pages}}" (click)="move_prev_pages()">
+                              <a class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                              </a>
+                            </li>
+                            <li *ngFor="let page of pagenation" class="page-item {{page.active_class}}" (click)="move_page($event,page)"><a class="page-link">{{page.page}}</a></li>
+                            <li class="page-item {{next_pages}}" (click)="move_next_pages()">
+                              <a class="page-link" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+
+                    </div>
+
+                    <div class="tab-pane p-3" id="comment" role="tabpanel">
+                      <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                          <thead>
+                          <tr style="text-align: center;">
+                            <th class="border-top-0">#</th>
+                            <th class="border-top-0">작성자</th>
+                            <th class="border-top-0">게시판</th>
+                            <th class="border-top-0">작성일</th>
+                            <th class="border-top-0">상세</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let comment of boards" style="text-align: center;">
+                            <td>
+                              {{comment.no}}
+                            </td>
+                            <td>
+                              {{comment.write_user_id}}
+                            </td>
+                            <td>
+                              {{comment.board_type}}
+                            </td>
+                            <td>
+                              {{comment.write_date}}
+                            </td>
+                            <td>
+                              <div class="button-items">
+                                <button type="button" class="btn btn-primary waves-effect waves-light" (click)="moveThePage(shop)">상세보기</button>
+                              </div>
+                            </td>
+                          </tr>
+
+                          </tbody>
+                        </table>
+
+                      </div>
+
+                      <div style="text-align: center">
+                        <nav aria-label="Page navigation example">
+                          <ul class="pagination justify-content-center">
+                            <li class="page-item {{prev_pages}}" (click)="move_prev_pages()">
+                              <a class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                              </a>
+                            </li>
+                            <li *ngFor="let page of pagenation" class="page-item {{page.active_class}}" (click)="move_page($event,page)"><a class="page-link">{{page.page}}</a></li>
+                            <li class="page-item {{next_pages}}" (click)="move_next_pages()">
+                              <a class="page-link" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+
+                    </div>
+
+                    <div class="tab-pane p-3" id="nomal" role="tabpanel">
+                      <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                          <thead>
+                          <tr style="text-align: center;">
+                            <th class="border-top-0">#</th>
+                            <th class="border-top-0">작성자</th>
+                            <th class="border-top-0">제목</th>
+                            <th class="border-top-0">게시판</th>
+                            <th class="border-top-0">조회수</th>
+                            <th class="border-top-0">댓글수</th>
+                            <th class="border-top-0">작성일</th>
+                            <th class="border-top-0">상태</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let list of boards" style="text-align: center;">
+                            <td>
+                              {{list.no}}
+                            </td>
+                            <td>
+                              {{list.writer_id}}
+                            </td>
+                            <td>
+                              {{list.title}}
+                            </td>
+                            <td>
+                              {{list.type}}
+                            </td>
+                            <td>
+                              {{list.click}}
+                            </td>
+                            <td>
+                              {{list.comments}}
+                            </td>
+                            <td>
+                              {{list.date}}
+                            </td>
+                            <td>
+                              <div class="button-items">
+                                <button type="button" class="btn btn-primary waves-effect waves-light" (click)="moveTheAnPage(list)">상세</button>
+                              </div>
+                            </td>
+                          </tr>
+
+                          </tbody>
+                        </table>
+
+                      </div>
+
+                      <div style="text-align: center">
+                        <nav aria-label="Page navigation example">
+                          <ul class="pagination justify-content-center">
+                            <li class="page-item {{prev_pages}}" (click)="move_prev_pages()">
+                              <a class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                              </a>
+                            </li>
+                            <li *ngFor="let page of pagenation" class="page-item {{page.active_class}}" (click)="move_page($event,page)"><a class="page-link">{{page.page}}</a></li>
+                            <li class="page-item {{next_pages}}" (click)="move_next_pages()">
+                              <a class="page-link" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+
+                    </div>
+                    <div class="tab-pane p-3" id="manager" role="tabpanel">
+
+                      <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                          <thead>
+                          <tr style="text-align: center;">
+                            <th class="border-top-0">#</th>
+                            <th class="border-top-0">작성자</th>
+                            <th class="border-top-0">제목</th>
+                            <th class="border-top-0">게시판</th>
+                            <th class="border-top-0">조회수</th>
+                            <th class="border-top-0">댓글수</th>
+                            <th class="border-top-0">작성일</th>
+                            <th class="border-top-0">상태</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let list of boards" style="text-align: center;">
+                            <td>
+                              {{list.no}}
+                            </td>
+                            <td>
+                              {{list.writer_id}}
+                            </td>
+                            <td>
+                              {{list.title}}
+                            </td>
+                            <td>
+                              {{list.type}}
+                            </td>
+                            <td>
+                              {{list.click}}
+                            </td>
+                            <td>
+                              {{list.comments}}
+                            </td>
+                            <td>
+                              {{list.date}}
+                            </td>
+                            <td>
+                              <div class="button-items">
+                                <button type="button" class="btn btn-primary waves-effect waves-light" (click)="moveTheAnPage(list)">상세</button>
+                              </div>
+                            </td>
+                          </tr>
+
+                          </tbody>
+                        </table>
+
+                      </div>
+
+                      <div style="text-align: center">
+                        <nav aria-label="Page navigation example">
+                          <ul class="pagination justify-content-center">
+                            <li class="page-item {{prev_pages}}" (click)="move_prev_pages()">
+                              <a class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                              </a>
+                            </li>
+                            <li *ngFor="let page of pagenation" class="page-item {{page.active_class}}" (click)="move_page($event,page)"><a class="page-link">{{page.page}}</a></li>
+                            <li class="page-item {{next_pages}}" (click)="move_next_pages()">
+                              <a class="page-link" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <app-footer></app-footer>
+
+  </div>
+  <!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+</body>

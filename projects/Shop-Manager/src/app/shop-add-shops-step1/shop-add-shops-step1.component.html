@@ -1,0 +1,96 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>샵 관리자</a></li>
+                    <li class="breadcrumb-item active">샵 추가</li>
+                    <li class="breadcrumb-item active">STEP-1</li>
+                  </ol>
+                </div>
+                <h4 class="page-title">제휴샵 추가</h4>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+                  <h5 class="header-title mb-4 mt-0">샵 정보 기입</h5>
+
+
+                  <div class="form-group row">
+                    <label for="ShopName" class="col-sm-2 col-form-label"> * 샵 명칭 (필수)</label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text"
+                             placeholder="파파이스"
+                             id="ShopName" #Shop_Name>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label"> * 샵 분류 (필수)</label>
+                    <div class="col-sm-10">
+                      <select class="custom-select" #Shop_Category>
+                        <option *ngFor="let item of items"  value="{{item.name}}">{{item.name}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="ShopSubTitle" class="col-sm-2 col-form-label">서브타이틀</label>
+                    <div class="col-sm-10">
+                      <input class="form-control"
+                             type="text"
+                             placeholder="좋은재료와 영양가 높은 재료를 사용합니다."
+                             id="ShopSubTitle" #subtitle>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                    <label class="col-sm-2 col-form-label">샵 소개글</label>
+                    <div class="col-sm-10">
+                      <div class="card m-b-30">
+                        <div class="card-body">
+                          <textarea id="summernote" #shop_content>Hello Summernote</textarea>
+                        </div>
+                      </div>
+                    </div> <!-- end col -->
+                  </div>
+
+                  <div class="float-right">
+                    <a (click)="next()" class="btn btn-primary waves-effect waves-light" style="color:#ffffff">다음으로</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

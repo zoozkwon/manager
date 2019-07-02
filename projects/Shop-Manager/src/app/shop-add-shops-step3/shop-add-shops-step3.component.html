@@ -1,0 +1,114 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>샵 관리자</a></li>
+                    <li class="breadcrumb-item active">샵 추가</li>
+                    <li class="breadcrumb-item active">STEP-3</li>
+                  </ol>
+                </div>
+                <h4 class="page-title">제휴샵 추가</h4>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+
+            <!--샵 주소-->
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+                  <h5 class="header-title mb-4 mt-0">샵 주소</h5>
+
+                  <div class="form-group row">
+
+                    <label class="col-sm-1 col-form-label">도,시 선택</label>
+                    <div class="col-sm-5">
+                      <select class="custom-select"  (change)="SelectSi()" #Shop_Si>
+                        <option *ngFor="let si of Dos" value="{{si.si}}">{{si.si}}</option>
+                      </select>
+                    </div>
+
+                    <label class="col-sm-1 col-form-label">군,구 선택</label>
+                    <div class="col-sm-5">
+                      <select class="custom-select" #Shop_Gu>
+                        <option *ngFor="let gu of Gus" value="{{gu.gu}}">{{gu.gu}}</option>
+                      </select>
+                    </div>
+
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="ShopAdress" class="col-sm-1 col-form-label" >상세주소</label>
+                    <div class="col-sm-11">
+                      <input class="form-control" type="text" placeholder="상세주소를 입력해주세요" id="ShopAdress" #adress>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+                  <h5 class="header-title mb-4 mt-0">샵 소개글 변경</h5>
+
+                  <div class="form-group row">
+
+                    <label for="Blog" class="col-sm-1 col-form-label">블로그</label>
+                    <div class="col-sm-5">
+                      <input class="form-control" type="text"
+                             placeholder="https://blog.naver.com/my-blog"
+                             id="Blog" #blog>
+                    </div>
+
+                    <label for="Kakao" class="col-sm-1 col-form-label">카카오 채팅</label>
+                    <div class="col-sm-5">
+                      <input class="form-control" type="text"
+                             placeholder="https://kakao/open/"
+                             id="Kakao" #kakao>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="float-right">
+                <a (click)="next()" class="btn btn-primary waves-effect waves-light" style="color:#ffffff;">다음으로</a>
+              </div>
+
+            </div>
+            <!-- //샵 주소 -->
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

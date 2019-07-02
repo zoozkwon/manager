@@ -1,0 +1,264 @@
+<!--샵 직원 정보-->
+<div class="col-md-12 col-xl-12">
+  <div class="card m-b-30">
+
+    <div class="card-body new-user">
+      <h5 class="header-title mb-4 mt-0">샵 직원 편집</h5>
+
+      <div class="text-right">
+        <!-- Small modal -->
+        <button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-animation="bounce" data-target=".new-staff-modal-center">새 직원 추가</button>
+      </div>
+      <!-- 새 직원 추가 모달 -->
+      <div class="modal fade new-staff-modal-center" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content" style="text-align: center;">
+            <div class="modal-header">
+              <h5 class="modal-title" id="newModalLabel">직원 추가</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              <div class="form-group row">
+                <label for="newStaffName" class="col-sm-2 col-form-label">이름</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" placeholder="앨리스"  id="newStaffName" #newstaff_name>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="newStaffAge" class="col-sm-2 col-form-label">나이</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="text" value="26" id="newStaffAge" #newstaff_age>
+                </div>
+              </div>
+
+              <div class="form-group row">
+
+                <label class="col-sm-3 col-form-label">근무 시작</label>
+                <!-- 시작 시간 -->
+                <div class="col-sm-3">
+                  <select class="custom-select" #newstart_pm>
+                    <option value="AM" selected>오전</option>
+                    <option value="PM">오후</option>
+                  </select>
+                </div>
+                <!-- 시작 시간 -->
+                <div class="col-sm-3">
+                  <input class="form-control" type="text" placeholder="시작 시간" #newstart_hour>
+                </div>
+                <!-- 시작 분 -->
+                <div class="col-sm-3">
+                  <input class="form-control" type="text" placeholder="시작 분" #newstart_min>
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label class="col-sm-3 col-form-label">근무 종료</label>
+                <!-- 시작 시간 -->
+                <div class="col-sm-3">
+                  <select class="custom-select" #newend_pm>
+                    <option value="AM" selected>오전</option>
+                    <option value="PM">오후</option>
+                  </select>
+                </div>
+                <!-- 마감 시간 -->
+                <div class="col-sm-3">
+                  <input class="form-control" type="text" placeholder="마감 시간" #newend_hour>
+                </div>
+                <!-- 샵 휴일 설정 -->
+                <div class="col-sm-3">
+                  <input class="form-control" type="text" placeholder="마감 분" #newend_min>
+                </div>
+              </div>
+
+
+              <div class="button-items">
+                <button type="button"
+                        class="btn btn-primary waves-effect waves-light"
+                        data-dismiss="modal"
+                        aria-label="Close" (click)="create_staff()" >새 직원 추가</button>
+              </div>
+
+            </div>
+
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+      </div><!-- /.modal -->
+      <!-- //직원 추가 모달 -->
+
+      <div class="table-responsive">
+        <table class="table table-hover mb-0">
+          <thead>
+          <tr>
+            <th class="border-top-0">#</th>
+            <th class="border-top-0">이름</th>
+            <th class="border-top-0">근무 시간</th>
+            <th class="border-top-0">출/퇴근 전환</th>
+            <th class="border-top-0">근무시간 표시</th>
+            <th class="border-top-0">예약 전환</th>
+            <th class="border-top-0">편집</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let staff of staffs">
+            <td>
+              {{staff.no}}
+            </td>
+            <td>
+            <a href="javascript:void(0);">{{staff.name}}</a>
+          </td>
+            <td>
+              {{staff.start_Pm}} {{staff.start_hour}} : {{staff.start_min}} -  {{staff.end_Pm}} {{staff.end_hour}} : {{staff.end_min}}</td>
+            <td>
+              <div class="button-items">
+                <button type="button" class="btn {{staff.color}} waves-effect waves-light" (click)="change(staff)" >{{staff.work}}</button>
+              </div>
+            </td>
+            <td>
+              <div class="button-items">
+                <button type="button" class="btn {{staff.work_color}} waves-effect waves-light" (click)="change_worktile(staff)" >{{staff.work_time}}</button>
+              </div>
+            </td>
+            <td>
+              <div class="button-items">
+                <button type="button" class="btn {{staff.deat_color}} waves-effect waves-light" (click)="change_deadline(staff)">{{staff.deadline}}</button>
+              </div>
+            </td>
+
+            <td>
+
+                <div class="text-center">
+                  <!-- Small modal -->
+                  <button type="button"
+                          class="btn btn-primary waves-effect waves-light"
+                          data-toggle="modal"
+                          data-animation="bounce"
+                          data-target=".bs-example-modal-center"
+                          (click)="GetStaffData(staff)">편집</button>
+                </div>
+
+              <!-- 직원 편집 모달 -->
+                <div class="modal fade bs-example-modal-center" tabindex="-1"
+                     role="dialog"
+                     aria-labelledby="mySmallModalLabel"
+                     aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">직원 편집</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body" *ngFor="let staff of get_staffs">
+
+                        <div class="form-group row">
+                          <label for="StaffName" class="col-sm-2 col-form-label">이름</label>
+                          <div class="col-sm-10">
+                            <input class="form-control" type="text" placeholder="앨리스" value="{{staff.name}}" id="StaffName" #staff_name>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="StaffAge" class="col-sm-2 col-form-label">나이</label>
+                          <div class="col-sm-10">
+                            <input class="form-control" type="number" id="StaffAge" min="1" max="99" value="{{staff.age}}" #staff_age>
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for="StaffConstent" class="col-sm-2 col-form-label">비고</label>
+                          <div class="col-sm-10">
+                            <textarea class="form-control" type="number" id="StaffConstent" rows="3" #staff_content>{{staff.content}}</textarea>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+
+                          <label class="col-sm-3 col-form-label">근무 시작</label>
+                          <!-- 시작 시간 -->
+                          <div class="col-sm-3">
+                            <select *ngIf="staff.start_Pm == 'AM'" class="custom-select" #start_pm>
+                              <option value="AM">오전</option>
+                              <option value="PM">오후</option>
+                            </select>
+                            <select *ngIf="staff.start_Pm == 'PM'" class="custom-select" #start_pm>
+                              <option value="PM">오후</option>
+                              <option value="AM">오전</option>
+                            </select>
+                            <select *ngIf="!staff.start_Pm" class="custom-select" #start_pm>
+                              <option value="PM">오전</option>
+                              <option value="AM">오후</option>
+                            </select>
+                          </div>
+                          <!-- 시작 시간 -->
+                          <div class="col-sm-3">
+                            <input class="form-control" type="number" placeholder="시작 시간"  min="1" max="12" value="{{staff.start_hour}}" #start_hour>
+                          </div>
+                          <!-- 시작 분 -->
+                          <div class="col-sm-3">
+                            <input class="form-control" type="number" placeholder="시작 분" min="0" max="59" value="{{staff.start_min}}" #start_min>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">근무 종료</label>
+                          <!-- 시작 시간 -->
+                          <div class="col-sm-3">
+                            <select *ngIf="staff.end_Pm == 'AM'" class="custom-select" #end_pm>
+                              <option value="AM">오전</option>
+                              <option value="PM">오후</option>
+                            </select>
+                            <select *ngIf="staff.end_Pm == 'PM'" class="custom-select" #end_pm>
+                              <option value="PM">오후</option>
+                              <option value="AM">오전</option>
+                            </select>
+                            <select *ngIf="!staff.end_Pm" class="custom-select" #end_pm>
+                              <option value="PM">오전</option>
+                              <option value="AM">오후</option>
+                            </select>
+                          </div>
+                          <!-- 마감 시간 -->
+                          <div class="col-sm-3">
+                            <input class="form-control"
+                                   type="number"
+                                   min="1" max="12"
+                                   placeholder="마감 시간" value="{{staff.end_hour}}" #end_hour>
+                          </div>
+                          <!-- 샵 휴일 설정 -->
+                          <div class="col-sm-3">
+                            <input class="form-control"
+                                   type="number"
+                                   min="0" max="59"
+                                   placeholder="마감 분" value="{{staff.end_min}}" #end_min>
+                          </div>
+                        </div>
+
+
+                        <div class="button-items">
+                          <button type="button"
+                                  class="btn btn-primary waves-effect waves-light"
+                                  data-dismiss="modal"
+                                  aria-label="Close" (click)="staff_update(staff)">변경사항 저장</button>
+                        </div>
+
+                      </div>
+
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
+              <!-- //직원 편집 모달 -->
+
+            </td>
+          </tr>
+
+          </tbody>
+        </table>
+
+      </div>
+
+    </div>
+  </div>
+</div>

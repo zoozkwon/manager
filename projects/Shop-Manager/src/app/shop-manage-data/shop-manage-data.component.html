@@ -1,0 +1,254 @@
+<!--샵 정보-->
+<div class="col-md-12 col-xl-12" >
+  <div class="card m-b-30">
+
+    <div class="card-body new-user">
+      <h5 class="header-title mb-4 mt-0">샵 소개글 변경</h5>
+
+      <div class="form-group row" *ngFor="let item of shops">
+        <label for="ShopName" class="col-sm-2 col-form-label">샵 명칭</label>
+        <div class="col-sm-10">
+          <input class="form-control" type="text" placeholder="패퍼로니" id="ShopName" value="{{item.shop_name}}" #Shop_Name>
+        </div>
+      </div>
+      <div class="form-group row" *ngFor="let item of shops">
+        <label class="col-sm-2 col-form-label">샵 분류</label>
+        <div class="col-sm-10">
+          <select class="custom-select" #Shop_Category>
+            <option selected>{{item.category}}</option>
+            <option value="1">피자</option>
+            <option value="2">치킨</option>
+            <option value="3">한식</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group row" *ngFor="let item of shops">
+        <label for="ShopSubTitle" class="col-sm-2 col-form-label">서브타이틀</label>
+        <div class="col-sm-10">
+          <input class="form-control"
+                 type="text"
+                 placeholder="좋은재료와 영양가 높은 재료를 사용합니다."
+                 id="ShopSubTitle"
+                 value="{{item.sub_title}}">
+        </div>
+
+        <div></div>
+
+      </div>
+
+      <div class="form-group row">
+        <label class="col-sm-2 col-form-label">샵 소개글</label>
+        <div class="col-sm-10">
+          <div class="card m-b-30">
+            <div [innerHTML]="shop_contents | sanitizeHtml" style="display:none;"></div>
+            <div class="card-body">
+              <textarea name="content" id="summernote" required [innerHTML]="shop_contents | sanitizeHtml" #shop_content></textarea>
+            </div>
+          </div>
+        </div> <!-- end col -->
+      </div>
+
+      <div class="button-items">
+        <button type="button" class="btn btn-primary waves-effect waves-light float-right">변경사항 저장</button>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<!-- //샵 정보 -->
+
+<!--샵 로고, 배너-->
+<div class="col-md-12 col-xl-12">
+  <div class="card m-b-30">
+    <div class="card-body new-user">
+      <h5 class="header-title mb-4 mt-0">제휴샵 이미지 변경</h5>
+
+      <div class="form-group row">
+        <div class="card-body">
+          <h4 class="mt-0 header-title">샵 배너</h4>
+          <div style="text-align: center">
+            <div class="" *ngFor="let item of shops">
+              <img src="{{item.banner}}" class="img-fluid" alt="Responsive image" style="max-width:350px;">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="card-body">
+          <h4 class="mt-0 header-title">샵 배너 이미지</h4>
+          <input type="file" id="shop_banner" class="dropify" (change)="selectFileToUpload($event)"/>
+
+          <div class="button-items">
+            <button type="button"
+                    class="btn btn-primary waves-effect waves-light float-right"
+                    id='banner'
+                    (click)="imageUpdate($event)">변경사항 저장</button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="form-group row">
+        <div class="card-body">
+          <h4 class="mt-0 header-title">샵 로고</h4>
+          <div style="text-align: center">
+            <div class="" *ngFor="let item of shops">
+
+              <img class="img-thumbnail" alt="200x200" style="width: 200px; height: 200px;" src="{{item.logo}}" data-holder-rendered="true">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <div class="card-body">
+          <h4 class="mt-0 header-title">샵 로고 이미지</h4>
+          <input type="file" id="shop_logo" class="dropify" (change)="selectFileToUpload($event)"/>
+
+          <div class="button-items">
+            <button type="button"
+                    class="btn btn-primary waves-effect waves-light float-right"
+                    id='logo'
+                    (click)="imageUpdate($event)">변경사항 저장</button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- // 샵 로고 배너 -->
+
+<!--샵 주소-->
+<div class="col-md-12 col-xl-12">
+  <div class="card m-b-30">
+    <div class="card-body new-user">
+      <h5 class="header-title mb-4 mt-0">샵 주소</h5>
+
+      <div class="form-group row">
+
+        <label class="col-sm-1 col-form-label">도,시 선택</label>
+        <div class="col-sm-5" *ngFor="let item of shops">
+          <select class="custom-select" (change)="SelectSi()" #Shop_Si>
+            <option selected> -- {{item.si}} -- </option>
+            <option *ngFor="let si of Dos">{{si.si}}</option>
+          </select>
+        </div>
+
+        <label class="col-sm-1 col-form-label">군,구 선택</label>
+        <div class="col-sm-5" *ngFor="let item of shops">
+          <select class="custom-select" #Shop_Gu>
+            <option selected> -- {{item.gu}} -- </option>
+            <option *ngFor="let gu of Gus">{{gu.gu}}</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="form-group row" *ngFor="let item of shops">
+        <label for="ShopAdress" class="col-sm-1 col-form-label">상세주소</label>
+        <div class="col-sm-11">
+          <input class="form-control" type="text" placeholder="상세주소를 입력해주세요" id="ShopAdress" value="{{item.adress}}" #Shop_Adress>
+        </div>
+      </div>
+
+      <div class="button-items">
+        <button type="button" class="btn btn-primary waves-effect waves-light float-right">변경사항 저장</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- //샵 주소 -->
+
+<!-- 영업 시간 -->
+<div class="col-md-12 col-xl-12">
+  <div class="card m-b-30">
+    <div class="card-body new-user">
+      <h5 class="header-title mb-4 mt-0">영업시간</h5>
+
+      <div class="form-group row" *ngFor="let time of optimes">
+
+        <label class="col-sm-1 col-form-label">{{time.name}}</label>
+        <!-- 시작 시간 -->
+        <div class="col-sm-3">
+          <select class="custom-select" (change)="starttime(time)" #start_time>
+            <option selected>{{time.start_time}}</option>
+            <option *ngFor="let start of times">{{start.time}}</option>
+          </select>
+        </div>
+        <!-- 마감 시간 -->
+        <div class="col-sm-3" >
+          <select class="custom-select" (change)="endtime(time)" #end_time>
+            <option selected>{{time.end_time}}</option>
+            <option *ngFor="let end of times">{{end.time}}</option>
+          </select>
+        </div>
+        <!-- 샵 휴일 설정 -->
+        <div class="col-sm-3">
+          <select *ngIf="time.OFF == 'N'" class="custom-select" (change)="off(time)" #OFF>
+            <option selected>정상 영업</option>
+            <option value="Y">휴일</option>
+          </select>
+          <select *ngIf="time.OFF == 'Y'" class="custom-select" (change)="off(time)" #OFF>
+            <option  selected>휴일</option>
+            <option value="N">정상 영업</option>
+          </select>
+        </div>
+
+        <div class="col-sm-2">
+          <div class="button-items">
+            <button type="button" class="btn btn-primary waves-effect waves-light float-right" (click)="timeUp(time)">변경사항 저장</button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- //영업 시간 -->
+
+<!-- 블로그 오픈 카톡 -->
+<div class="col-md-12 col-xl-12" *ngFor="let item of shops">
+  <div class="card m-b-30">
+
+
+    <div class="card-body new-user">
+      <h5 class="header-title mb-4 mt-0">샵 소개글 변경</h5>
+
+      <div class="form-group row">
+
+        <label for="Blog" class="col-sm-1 col-form-label">블로그</label>
+        <div class="col-sm-5">
+          <input class="form-control" type="text"
+                 placeholder="https://blog.naver.com/my-blog"
+                 value="{{item.blog}}"
+                 id="Blog" #blog>
+        </div>
+
+        <label for="Kakao" class="col-sm-1 col-form-label">카카오 채팅</label>
+        <div class="col-sm-5">
+          <input class="form-control" type="text"
+                 placeholder="https://kakao/open-talk/"
+                 value="{{item.kakao_talk}}"
+                 id="Kakao" #kakao>
+        </div>
+
+      </div>
+
+      <div class="button-items">
+        <button type="button" class="btn btn-primary waves-effect waves-light float-right" (click)="blogsUpdate()">변경사항 저장</button>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>

@@ -1,0 +1,97 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>샵 관리자</a></li>
+                    <li class="breadcrumb-item active">샵 이용기간 연장</li>
+                    <li class="breadcrumb-item active">STEP-1</li>
+                  </ol>
+                </div>
+                <h4 class="page-title">샵 이용기간 연장</h4>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+
+                  <h5 class="header-title mb-4 mt-0">패키지 리스트</h5>
+
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item waves-effect waves-light">
+                      <a class="nav-link active" data-toggle="tab" href="#home-1" role="tab">솔로샵</a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                      <a class="nav-link" data-toggle="tab" href="#profile-1" role="tab">로드샵</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+                    <div class="tab-pane active p-3" id="home-1" role="tabpanel">
+                      <div class="col-lg-4 " *ngFor="let shop of solo_products">
+                        <div class="card m-b-30 card-body text-center" >
+                          <h3 class="card-title font-35 mt-0">{{shop.title}}</h3>
+                          <h2 style="font-size: 3.6em; margin-top:25px;margin-bottom:25px;">₩ {{shop.price}}</h2>
+                          <div class="card-text" style="height: 300px; font-size: 1.2em;">
+                            <div [innerHTML]="shop.products_content | sanitizeHtml">
+                            </div>
+                          </div>
+                          <a (click)="next(shop)" style="color:#ffffff" class="btn btn-primary waves-effect waves-light">패키지 구매</a>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="tab-pane p-3" id="profile-1" role="tabpanel">
+                      <div class="col-lg-4 " *ngFor="let shop of road_products">
+                        <div class="card m-b-30 card-body text-center" >
+                          <h3 class="card-title font-35 mt-0">{{shop.title}}</h3>
+                          <h2 style="font-size: 3.6em; margin-top:25px;margin-bottom:25px;">₩ {{shop.price}}</h2>
+                          <div class="card-text" style="height: 300px; font-size: 1.2em;">
+                            <div [innerHTML]="shop.products_content | sanitizeHtml">
+                            </div>
+                          </div>
+                          <a (click)="next(shop)" style="color:#ffffff" class="btn btn-primary waves-effect waves-light">패키지 구매</a>
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

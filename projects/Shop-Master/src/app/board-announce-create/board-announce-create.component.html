@@ -1,0 +1,107 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>관리자</a></li>
+                    <li class="breadcrumb-item active">게시글 관리</li>
+                  </ol>
+                </div>
+                <h4 class="page-title">공지글 작성</h4>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+
+                  <!--샵 정보-->
+                  <div class="col-md-12 col-xl-12">
+                    <div class="card m-b-30">
+
+                      <div class="card-body new-user">
+                        <h4 class="header-title mb-4 mt-0">공지 작성</h4>
+
+                        <div class="form-group row">
+
+                          <label for="write" class="col-sm-1 col-form-label">제목</label>
+                          <div class="col-sm-11">
+                            <input class="form-control" type="text" placeholder="제목" id="write" #title>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group row">
+
+                          <label for="type" class="col-sm-1 col-form-label">게시판</label>
+                          <div class="col-sm-11">
+                            <select class="custom-select" id="type" #board_type>
+                              <!--<option selected></option>-->
+                              <option value="announce" selected>일반 공지</option>
+                              <option value="Mannounce" >사장님 공지</option>
+                            </select>
+                          </div>
+
+                        </div>
+                        <div class="form-group row">
+                          <label class="col-sm-1 col-form-label">내용</label>
+                          <div class="col-sm-11">
+                            <textarea id="summernote"
+                                 style="min-height:200px; border:solid; border-width:1px; border-color:#d4d4d4;" #content></textarea>
+                          </div>
+                        </div>
+                        <div class="button-items">
+                          <button type="button" class="btn btn-primary waves-effect waves-light float-right"
+                                  (click)="back()">돌아가기</button>
+                          <button type="button" class="btn btn-primary waves-effect waves-light float-right"
+                                  (click)="create()">게시글 작성</button>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <app-footer></app-footer>
+
+  </div>
+  <!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+</body>

@@ -1,0 +1,123 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>관리자</a></li>
+                    <li class="breadcrumb-item active">샵 리스트</li>
+                  </ol>
+                </div>
+                <h4 class="page-title">제휴샵 관리</h4>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+                  <h5 class="header-title mb-4 mt-0">제휴샵 리스트</h5>
+                  <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                      <thead>
+                      <tr style="text-align: center;">
+                        <th class="border-top-0">로고</th>
+                        <th class="border-top-0">샵 이름</th>
+                        <th class="border-top-0">상태</th>
+                        <th class="border-top-0">총 리뷰</th>
+                        <th class="border-top-0">등록된 직원</th>
+                        <th class="border-top-0">등록된 코스</th>
+                        <th class="border-top-0">샵 종료시간</th>
+                        <th class="border-top-0">수정</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let shop of items" style="text-align: center;">
+                        <td>
+                          <img src="{{shop.datas.logo}}" alt="" style="width:30px; border-radius:50%;">
+                        </td><td>
+                        <a >{{shop.datas.shop_name}}</a>
+                      </td>
+                        <td>{{shop.statuses}}</td>
+                        <td>{{shop.datas.review}}</td>
+                        <td>{{shop.datas.staff}}</td>
+                        <td>{{shop.datas.course}}</td>
+
+                        <td>
+                          {{shop.datas.LeftDate}} 일
+                          <!--
+                          <div data-role="countdown" data-hours="5" style="width:70px;"></div>
+                          -->
+                        </td>
+
+                        <td>
+                          <div class="button-items">
+                            <button type="button" class="btn btn-primary waves-effect waves-light" (click)="moveThePage(shop)">수정</button>
+                          </div>
+                        </td>
+                      </tr>
+
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+              <div style="text-align: center">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                    <li class="page-item {{prev_pages}}" (click)="move_prev_pages()">
+                      <a class="page-link" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                    </li>
+                    <li *ngFor="let page of pagenation" class="page-item {{page.active_class}}" (click)="move_page($event,page)"><a class="page-link">{{page.page}}</a></li>
+                    <li class="page-item {{next_pages}}" (click)="move_next_pages()">
+                      <a class="page-link" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <app-footer></app-footer>
+
+  </div>
+  <!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+</body>

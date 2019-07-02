@@ -1,0 +1,166 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>관리자</a></li>
+                    <li class="breadcrumb-item active">샵 연장 신청 관리</li>
+                  </ol>
+                </div>
+                <h4 class="page-title">샵 연장 리스트</h4>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+
+                  <!--샵 정보-->
+                  <div class="col-md-12 col-xl-12" *ngFor="let shop of shops">
+                    <div class="card m-b-30">
+
+                      <div class="card-body new-user">
+                        <h5 class="header-title mb-4 mt-0">개인정보 수정</h5>
+
+                        <div class="form-group row">
+                          <label for="shop_name" class="col-sm-2 col-form-label">샵명</label>
+                          <div class="col-sm-10">
+                            <input class="form-control" type="text" placeholder="샵명" id="shop_name" value="{{shop.shop_name}}" disabled>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="manager" class="col-sm-2 col-form-label">매니저 명</label>
+                          <div class="col-sm-10">
+                            <input class="form-control" type="text" placeholder="매니저" id="manager" value="{{shop.writer_name}}" disabled>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="category" class="col-sm-2 col-form-label">카테고리</label>
+                          <div class="col-sm-10">
+                            <input class="form-control" type="text" placeholder="매니저" id="category" value="{{shop.category}}" disabled>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="adress" class="col-sm-2 col-form-label">샵 위치</label>
+                          <div class="col-sm-3">
+                            <input class="form-control" type="text" placeholder="매니저" id="adress" value="{{shop.si}}" disabled>
+                          </div>
+                          <div class="col-sm-3">
+                            <input class="form-control" type="text" placeholder="매니저" value="{{shop.gu}}" disabled>
+                          </div>
+                          <div class="col-sm-4">
+                            <input class="form-control" type="text" placeholder="매니저" value="{{shop.adress}}" disabled>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="email" class="col-sm-2 col-form-label">이메일</label>
+                          <div class="col-sm-10">
+                            <input class="form-control"
+                                   type="email"
+                                   placeholder="이메일"
+                                   value="{{shop.email}}"
+                                   id="email" disabled>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label for="leftDate" class="col-sm-2 col-form-label">샵 남은 이용기간</label>
+                          <div class="col-sm-10">
+                            <input class="form-control" type="text" placeholder="매니저" id="leftDate"
+                                   value="{{shop.LeftDate}} 일        {{shop.EndDate}} 까지" disabled>
+                          </div>
+                        </div>
+
+                        <div class="form-group row" *ngFor="let receive of receives">
+                          <label for="receive_date" class="col-sm-2 col-form-label">연장 신청일</label>
+                          <div class="col-sm-4">
+                            <input class="form-control"
+                                   type="text"
+                                   placeholder="작성일"
+                                   value="{{receive.receive_date}}"
+                                   id="receive_date" disabled>
+                          </div>
+
+                          <label for="deposit_date" class="col-sm-2 col-form-label">최종 입금일</label>
+                          <div class="col-sm-4">
+                            <input class="form-control"
+                                   type="text"
+                                   placeholder="작성일"
+                                   value="{{receive.deposit_date}} 까지"
+                                   id="deposit_date" disabled>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group row">
+                          <label class="col-sm-2 col-form-label">샵 연장 승인</label>
+                          <div class="col-sm-10">
+                            <select class="custom-select" #is_Delete>
+                              <!--<option selected></option>-->
+                              <option value="Y">승인</option>
+                              <option value="N">취소</option>
+                            </select>
+                          </div> <!-- end col -->
+
+                        </div>
+
+                        <div class="button-items">
+                          <button type="button" class="btn btn-primary waves-effect waves-light float-right"
+                                  (click)="back()">돌아가기</button>
+                          <button type="button" class="btn btn-primary waves-effect waves-light float-right"
+                                  (click)="update(shop)">변경사항 저장</button>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- //샵 정보 -->
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <app-footer></app-footer>
+
+  </div>
+  <!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+</body>

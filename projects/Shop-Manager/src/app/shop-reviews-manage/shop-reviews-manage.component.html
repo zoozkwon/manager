@@ -1,0 +1,135 @@
+<script src="../../../../../../../apple/src/app/app.component.ts"></script>
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>샵 관리자</a></li>
+                    <li class="breadcrumb-item">샵 리뷰</li>
+                    <li class="breadcrumb-item active">리뷰 관리</li>
+                  </ol>
+                </div>
+                <h4 class="page-title">샵 리뷰 관리</h4>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+                  <h5 class="header-title mb-4 mt-0">제휴샵 리뷰</h5>
+
+                  <!-- 댓글 작성 -->
+                  <div class="card m-b-30 card-body" *ngFor="let review of reviews" style="border-bottom: 1px solid #ddd;">
+                    <h4 class="card-title font-20 mt-0">
+                      <img class="rounded-circle" src="{{review.user_thumbnail}}" alt="user" width="40" height="40">
+                      {{review.write_user_name}} [ 별점 {{review.GPA}} ]
+                    </h4>
+                    <p class="card-text">{{review.comment}}</p>
+                    <p class="card-text">
+                      <small class="text-muted">{{review.write_date}}</small>
+                    </p>
+                    <div class="button-items">
+                      <button [hidden]="!review.replyForm"
+                               type="button"
+                               class="btn btn-primary waves-effect waves-light float-right"
+                               (click)="reply_form(review)">답글 작성</button>
+                      <button *ngIf="review.in_reply == 'Y'"
+                               type="button"
+                               class="btn btn-primary waves-effect waves-light float-right"
+                               (click)="showReplys(review) ">댓글 보기</button>
+                    </div>
+
+                    <div [hidden]="review.replyForm" class="form-group" style="margin-top : 10px;" >
+                      <label>댓글 작성</label>
+                      <div>
+                        <textarea required class="form-control" rows="5" #reply_content></textarea>
+                      </div>
+
+                      <div class="button-items float-right" style="margin-top : 10px;">
+                        <button type="button" class="btn btn-primary waves-effect waves-light" (click)="write_reply(review)">작성</button>
+                        <button type="button" class="btn btn-primary waves-effect waves-light" (click)="reply_cancel(review)">취소</button>
+                      </div>
+
+                    </div>
+
+                    <div [hidden]="review.replyComment" class="form-group" style="margin-top : 10px; margin-left:30px;" >
+                      <label>댓글</label>
+                      <div *ngFor="let reply of replys" style="margin-bottom:10px;">
+                        <h4 class="card-title font-20 mt-0">
+                          <img class="rounded-circle" src="{{reply.user_thumbnail}}" alt="user" width="40">
+                          {{reply.write_user_name}}
+                          <button type="button" class="btn btn-primary waves-effect waves-light float-right" *ngIf="!reply.rewrite" (click)="rewrite_can(reply)">취소</button>
+                          <button type="button" class="btn btn-primary waves-effect waves-light float-right" *ngIf="reply.rewrite" (click)="rewrite_reply(reply)" style="margin-right: 5px;">편집</button>
+                          <button type="button" class="btn btn-primary waves-effect waves-light float-right" *ngIf="!reply.rewrite" (click)="rewrite_update(review,reply)" style="margin-right: 5px;">수정</button>
+                        </h4>
+                        <p class="card-text" *ngIf="reply.rewrite">{{reply.comment}}</p>
+                          <div *ngIf="!reply.rewrite">
+                            <textarea required class="form-control" rows="5" #reply_up_content>{{reply.comment}}</textarea>
+                          </div>
+                        <p class="card-text">
+                          <small class="text-muted">{{reply.write_date}}</small>
+                        </p>
+
+                      </div>
+                    </div>
+
+                  </div>
+                  <!-- //댓글 작성 -->
+
+                </div>
+
+                <div style="text-align: center">
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                    <li class="page-item {{prev_pages}}" (click)="move_prev_pages()">
+                      <a class="page-link" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                        <span class="sr-only">Previous</span>
+                      </a>
+                    </li>
+                    <li *ngFor="let page of pagenation" class="page-item {{page.active_class}}" (click)="move_page($event,page)"><a class="page-link">{{page.page}}</a></li>
+                    <li class="page-item {{next_pages}}" (click)="move_next_pages()">
+                      <a class="page-link" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                        <span class="sr-only">Next</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>

@@ -1,0 +1,138 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>관리자</a></li>
+                    <li class="breadcrumb-item active">게시글 관리</li>
+                  </ol>
+                </div>
+                <h4 class="page-title">공지 관리</h4>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+
+                  <!--샵 정보-->
+                  <div class="col-md-12 col-xl-12">
+                    <div class="card m-b-30">
+
+                      <div class="card-body new-user">
+                        <h4 class="header-title mb-4 mt-0">게시글 상세</h4>
+
+                        <div class="form-group row"  *ngFor="let item of contents">
+                          <label for="userId" class="col-sm-1 col-form-label">작성자</label>
+                          <div class="col-sm-5">
+                            <input class="form-control" type="text" placeholder="작성자" id="userId" value="{{item.writer_id}}" disabled >
+                          </div>
+
+                          <label for="date" class="col-sm-1 col-form-label">작성일</label>
+
+                          <div class="col-sm-5">
+                            <input class="form-control" type="text" placeholder="작성일" id="date" value="{{item.date}}" disabled>
+                          </div>
+
+                        </div>
+
+                        <div class="form-group row"  *ngFor="let item of contents">
+
+                          <label for="write" class="col-sm-1 col-form-label">제목</label>
+                          <div class="col-sm-5">
+                            <input class="form-control" type="text" placeholder="제목" id="write" value="{{item.title}}" #title>
+                          </div>
+
+                          <label for="clicked" class="col-sm-1 col-form-label">조회수</label>
+                          <div class="col-sm-5">
+                            <input class="form-control"
+                                   type="text"
+                                   placeholder="조회수"
+                                   value="{{item.click}}"
+                                   id="clicked" disabled>
+                          </div>
+                        </div>
+
+                        <div class="form-group row"  *ngFor="let item of contents">
+
+                          <label for="board" class="col-sm-1 col-form-label">게시판</label>
+                          <div class="col-sm-5">
+                            <input class="form-control" type="text" placeholder="게시판" id="board" value="{{item.type}}" disabled>
+                          </div>
+
+                          <label for="comment" class="col-sm-1 col-form-label">댓글수</label>
+                          <div class="col-sm-5">
+                            <input class="form-control"
+                                   type="text"
+                                   placeholder="댓글수"
+                                   value="{{item.comments}}"
+                                   id="comment" disabled>
+                          </div>
+                        </div>
+
+                        <div class="form-group row">
+                          <label class="col-sm-1 col-form-label">게시판</label>
+                          <div class="col-sm-11">
+                            <div [innerHTML]="text | sanitizeHtml" ></div>
+                            <textarea [innerHTML]="text | sanitizeHtml" id="summernote"
+                                      style="min-height:200px;" #content></textarea>
+                          </div>
+                        </div>
+                        <div class="button-items">
+                          <button type="button" class="btn btn-primary waves-effect waves-light float-right"
+                                  (click)="back()">돌아가기</button>
+                          <button type="button" class="btn btn-primary waves-effect waves-light float-right"
+                                  (click)="delete()">게시글 삭제</button>
+                          <button type="button" class="btn btn-primary waves-effect waves-light float-right"
+                                  (click)="update()">변경사항 저장</button>
+                        </div>
+
+                      </div>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <app-footer></app-footer>
+
+  </div>
+  <!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+</body>
+

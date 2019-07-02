@@ -1,0 +1,208 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>샵 관리자</a></li>
+                    <li class="breadcrumb-item active">계정 관리</li>
+                  </ol>
+                </div>
+                <h4 class="page-title">유저 계정 관리</h4>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+
+                  <!-- Nav tabs -->
+                  <ul class="nav nav-pills nav-justified" role="tablist">
+                    <li class="nav-item waves-effect waves-light">
+                      <a class="nav-link active" data-toggle="tab" href="#manager" role="tab">사장님 계정 관리</a>
+                    </li>
+                    <li class="nav-item waves-effect waves-light">
+                      <a class="nav-link" data-toggle="tab" href="#nomal" role="tab">일반 유저 계정 관리</a>
+                    </li>
+                  </ul>
+                  <div class="tab-content">
+
+                    <div class="tab-pane active p-3" id="manager" role="tabpanel">
+                      <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                          <thead>
+                          <tr style="text-align: center;">
+                            <th class="border-top-0">#</th>
+                            <th class="border-top-0">ID</th>
+                            <th class="border-top-0">이름</th>
+                            <th class="border-top-0">관리자</th>
+                            <th class="border-top-0">매니저</th>
+                            <th class="border-top-0">계정 승인</th>
+                            <th class="border-top-0">등록일</th>
+                            <th class="border-top-0">수정</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let user of managers" style="text-align: center;">
+                            <td>
+                              {{user.no}}
+                            </td>
+                            <td>{{user.id}}</td>
+                            <td>{{user.name}}</td>
+                            <td >
+                              <div *ngIf="user.approval == 'Y'">관리자</div>
+                              <div *ngIf="user.approval != 'Y'" style="color:#ff0000"> 권한없음 </div>
+                            </td>
+                            <td>
+                              <div *ngIf="user.isShopAuth == 'Y'"> 매니저 </div>
+                              <div *ngIf="user.isShopAuth != 'Y'" style="color:#ff0000"> 권한없음 </div>
+                            </td>
+
+                            <td>
+                              <div *ngIf="user.authority == 'Y'"> 승인됨 </div>
+                              <div *ngIf="user.authority != 'Y'" style="color:#ff0000"> 비승인 </div>
+                            </td>
+                            <td>
+                              {{user.date}}
+                              <!--
+                              <div data-role="countdown" data-hours="5" style="width:70px;"></div>
+                              -->
+                            </td>
+                            <td>
+                              <div class="button-items">
+                                <button type="button" class="btn btn-primary waves-effect waves-light" (click)="moveManagerDetailPage(user)">수정</button>
+                              </div>
+                            </td>
+                          </tr>
+
+                          </tbody>
+                        </table>
+
+                      </div>
+
+                      <div style="text-align: center">
+                        <nav aria-label="Page navigation example">
+                          <ul class="pagination justify-content-center">
+                            <li class="page-item {{mprev_pages}}" (click)="mmove_prev_pages()">
+                              <a class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                              </a>
+                            </li>
+                            <li *ngFor="let page of mpagenation" class="page-item {{page.active_class}}" (click)="mmove_page($event,page)"><a class="page-link">{{page.page}}</a></li>
+                            <li class="page-item {{mnext_pages}}" (click)="mmove_next_pages()">
+                              <a class="page-link" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+
+                    </div>
+
+                    <div class="tab-pane p-3" id="nomal" role="tabpanel">
+                      <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                          <thead>
+                          <tr style="text-align: center;">
+                            <th class="border-top-0">#</th>
+                            <th class="border-top-0">ID</th>
+                            <th class="border-top-0">이름</th>
+                            <th class="border-top-0">등록일</th>
+                            <th class="border-top-0">수정</th>
+                          </tr>
+                          </thead>
+                          <tbody>
+                          <tr *ngFor="let user of nomals" style="text-align: center;">
+                            <td>
+                              {{user.no}}
+                            </td>
+                            <td>
+                              {{user.id}}
+                            </td>
+                            <td>
+                              {{user.name}}
+                            </td>
+                            <td>
+                              {{user.date}}
+                            </td>
+
+                            <td>
+                              <div class="button-items">
+                                <button type="button" class="btn btn-primary waves-effect waves-light" (click)="moveNomalDetailPage(user)">수정</button>
+                              </div>
+                            </td>
+                          </tr>
+
+                          </tbody>
+                        </table>
+
+                      </div>
+                      <div style="text-align: center">
+                        <nav aria-label="Page navigation example">
+                          <ul class="pagination justify-content-center">
+                            <li class="page-item {{nprev_pages}}" (click)="nmove_prev_pages()">
+                              <a class="page-link" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                              </a>
+                            </li>
+                            <li *ngFor="let page of npagenation" class="page-item {{page.active_class}}" (click)="nmove_page($event,page)"><a class="page-link">{{page.page}}</a></li>
+                            <li class="page-item {{nnext_pages}}" (click)="nmove_next_pages()">
+                              <a class="page-link" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </nav>
+                      </div>
+                    </div>
+
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <app-footer></app-footer>
+
+  </div>
+  <!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+</body>

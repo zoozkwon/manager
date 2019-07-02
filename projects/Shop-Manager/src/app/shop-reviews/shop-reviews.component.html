@@ -1,0 +1,94 @@
+<body class="fixed-left">
+
+<!-- Loader -->
+<div id="preloader"><div id="status"><div class="spinner"></div></div></div>
+
+<!-- Begin page -->
+<div id="wrapper">
+
+  <app-side-nav></app-side-nav>
+
+  <!-- Start right Content here -->
+
+  <div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+
+      <app-header></app-header>
+
+      <div class="page-content-wrapper ">
+
+        <div class="container-fluid">
+
+          <div class="row">
+            <div class="col-sm-12">
+              <div class="page-title-box">
+                <div class="btn-group float-right">
+                  <ol class="breadcrumb hide-phone p-0 m-0">
+                    <li class="breadcrumb-item"><a>샵 관리자</a></li>
+                    <li class="breadcrumb-item active">샵 리뷰</li>
+                  </ol>
+                </div>
+                <h4 class="page-title">제휴샵 관리</h4>
+              </div>
+            </div>
+          </div>
+          <!-- end page title end breadcrumb -->
+          <div class="row">
+            <div class="col-md-12 col-xl-12">
+              <div class="card m-b-30">
+                <div class="card-body new-user">
+                  <h5 class="header-title mb-4 mt-0">제휴샵 리스트</h5>
+                  <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                      <thead>
+                      <tr>
+                        <th class="border-top-0">#</th>
+                        <th class="border-top-0">로고</th>
+                        <th class="border-top-0">샵 이름</th>
+                        <th class="border-top-0">총 리뷰</th>
+                        <th class="border-top-0"> 리뷰 목록 조회</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      <tr *ngFor="let shop of items">
+                        <td>{{shop.no}}</td>
+                        <td>
+                          <img src="{{shop.logo}}" alt="" style="width:30px; border-radius: 50%;">
+                        </td>
+                        <td>
+                          <a>{{shop.shop_name}}</a>
+                        </td>
+
+                        <td>{{shop.review}}</td>
+
+                        <td>
+                          <div class="button-items">
+                            <button type="button" class="btn btn-primary waves-effect waves-light" (click)="moveThePage(shop)">조회</button>
+                          </div>
+                        </td>
+                      </tr>
+
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- container -->
+
+      </div> <!-- Page content Wrapper -->
+
+    </div> <!-- content -->
+
+    <app-footer></app-footer>
+
+  </div>
+  <!-- End Right content here -->
+
+</div>
+<!-- END wrapper -->
+</body>
